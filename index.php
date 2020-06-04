@@ -45,13 +45,20 @@ echo $paginas;
         <?php  endforeach ?>
         <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" 
-            href="#">Anterior</a></li>
-            <?php for ($i=0; $i <$paginas ; $i++): ?>
-                
-           
             <li class="page-item">
-                <a class="page-link"href="#">
+                <a class="page-link" 
+                href ="index.php?pagina=<?php echo  $_GET['pagina']-1 ?>">
+                    Anterior
+                </a>
+            </li>
+
+
+            <?php for ($i=0; $i <$paginas ; $i++): ?>                
+           
+            <li class="page-item 
+            <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?> ">
+                <a class="page-link"
+                href="index.php?pagina=<?php echo $i+1 ?>">
                     <?php echo $i+1 ?>
                 </a>
             </li>
