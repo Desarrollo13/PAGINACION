@@ -7,7 +7,14 @@ $sql='SELECT * FROM articulos';
 $sentencia=$pdo->prepare($sql);
 $sentencia->execute();
 $resultado=$sentencia->fetchAll();
-var_dump($resultado);
+// var_dump($resultado);
+$articulos_x_pagina=3;
+//contar articulos de nuestra base de datos
+$total_articulos_db=$sentencia->rowCount();
+// echo $total_articulos_db;
+$paginas=$total_articulos_db/3;
+$paginas=ceil($paginas);
+echo $paginas;
 
 
 
@@ -33,16 +40,25 @@ var_dump($resultado);
         <?php  foreach ($resultado as $articulo): { }?>
 
         <div class="alert alert-primary" role="alert">
-            <?php  echo $articulo ?>
+            <?php  echo $articulo['titulo'] ?>
         </div>
         <?php  endforeach ?>
         <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link" 
+            href="#">Anterior</a></li>
+            <?php for ($i=0; $i <$paginas ; $i++): ?>
+                
+           
+            <li class="page-item">
+                <a class="page-link"href="#">
+                    <?php echo $i+1 ?>
+                </a>
+            </li>
+             <?php endfor ?>
+
+            <li class="page-item"><a class="page-link"
+             href="#">Siguiente</a></li>
         </ul>
     </nav>
     </div>
