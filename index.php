@@ -36,8 +36,17 @@ echo $paginas;
 <body>
     
     <div class="container my-5">
+        
         <h1 class="mb-5">Paginacion</h1>
-        <?php  foreach ($resultado as $articulo): { }?>
+
+        <php 
+        if(!$_GET){
+            header('Location:index.php?pagina=1');        
+        }        
+       
+        ?>   
+        
+        <?php  foreach ($resultado_articulos as $articulo): ?>
 
         <div class="alert alert-primary" role="alert">
             <?php  echo $articulo['titulo'] ?>
