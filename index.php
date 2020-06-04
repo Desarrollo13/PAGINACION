@@ -5,6 +5,11 @@ include_once'conexion.php';
 //vamos a llamar a todos los articulos con la sentencia sql
 $sql='SELECT * FROM articulos';
 $sentencia=$pdo->prepare($sql);
+$sentencia->execute();
+$resultado=$sentencia->fetchAll();
+var_dump($resultado);
+
+
 
 ?>
 <!doctype html>
@@ -25,20 +30,23 @@ $sentencia=$pdo->prepare($sql);
     
     <div class="container my-5">
         <h1 class="mb-5">Paginacion</h1>
+        <?php  foreach ($resultado as $articulo): { }?>
 
         <div class="alert alert-primary" role="alert">
-            A simple primary alert—check it out!
+            <?php  echo $articulo ?>
         </div>
-    </div>
-    <nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
+        <?php  endforeach ?>
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
     </nav>
+    </div>
+    
 
    
 </body>
