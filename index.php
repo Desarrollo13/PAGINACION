@@ -45,7 +45,8 @@ echo $paginas;
         <?php  endforeach ?>
         <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item">
+            <li class="page-item
+            <?php echo $_GET['pagina'] <=1? 'disabled':''?>">
                 <a class="page-link" 
                 href ="index.php?pagina=<?php echo  $_GET['pagina']-1 ?>">
                     Anterior
@@ -64,8 +65,13 @@ echo $paginas;
             </li>
              <?php endfor ?>
 
-            <li class="page-item"><a class="page-link"
-             href="#">Siguiente</a></li>
+            <li class="page-item 
+            <?php echo $_GET['pagina'] >=$paginas? 'disabled':''?>">
+                
+
+
+                <a class="page-link"
+            href ="index.php?pagina=<?php echo  $_GET['pagina']+1 ?>">Siguiente</a></li>
         </ul>
     </nav>
     </div>
