@@ -42,7 +42,13 @@ echo $paginas;
         <php 
         if(!$_GET){
             header('Location:index.php?pagina=1');        
-        }        
+        } 
+
+        $sql_articulos='SELECT * FROM articulos LIMIT 0,3';  
+        $sentencia_articulos = $pdo->prepare($sql_articulos);
+        $sentencia_articulos->execute();
+
+        $resultado_articulos =  $sentencia_articulos->fetchAll();  
        
         ?>   
         
