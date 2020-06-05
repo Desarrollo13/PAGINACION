@@ -14,7 +14,7 @@ $total_articulos_db=$sentencia->rowCount();
 // echo $total_articulos_db;
 $paginas=$total_articulos_db/3;
 $paginas=ceil($paginas);
-echo $paginas;
+// echo $paginas;
 
 
 
@@ -37,18 +37,31 @@ echo $paginas;
     
     <div class="container my-5">
         
-        <h1 class="mb-5">Paginacion</h1>
+        <h1 class="mb-5">Paginaciòn</h1>
 
-        <php 
+        <?php 
+        
         if(!$_GET){
             header('Location:index.php?pagina=1');        
         } 
+        //si esta condicion es mayor que 10 entonces renderizamos por que si el cliente pone 10 que sobre pase nuestro limite
 
-        $sql_articulos='SELECT * FROM articulos LIMIT 0,3';  
+        if($_GET['pagina']>$paginas || $_GET['pagina']<=0 ){
+            header('Location:index.php?pagina=1');        
+
+        }
+        //variable para remplazar en forma dinamica 0,3
+        $iniciar=($_GET['pagina']-1) * $articulos_x_pagina;
+        // echo $iniciar;
+        //vamos a hacer el pasaje de entero a string ya que en inicio devuelve un valor entero
+
+        $sql_articulos = 'SELECT * FROM articulos LIMIT :iniciar,:narticulos';
         $sentencia_articulos = $pdo->prepare($sql_articulos);
+        $sentencia_articulos->bindParam(':iniciar', $iniciar, PDO::PARAM_INT);
+        $sentencia_articulos->bindParam(':narticulos', $articulos_x_pagina, PDO::PARAM_INT);      
         $sentencia_articulos->execute();
 
-        $resultado_articulos =  $sentencia_articulos->fetchAll();  
+        $resultado_articulos=$sentencia_articulos->fetchAll();        
        
         ?>   
         
